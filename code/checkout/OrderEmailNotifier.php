@@ -96,7 +96,7 @@ class OrderEmailNotifier
         if ($this->debugMode) {
             return $email->debug();
         } else {
-            return $email->send();
+            $email->send();
         }
     }
 
@@ -112,7 +112,8 @@ class OrderEmailNotifier
             '',
             array('OrderNo' => $this->order->Reference)
         );
-        return $this->sendEmail(
+
+        $this->sendEmail(
             'Order_ConfirmationEmail',
             $subject,
             self::config()->bcc_confirmation_to_admin
@@ -124,6 +125,7 @@ class OrderEmailNotifier
      */
     public function sendAdminNotification()
     {
+
         $subject = _t(
             'ShopEmail.AdminNotificationSubject',
             'Order #{OrderNo} notification',
@@ -137,7 +139,7 @@ class OrderEmailNotifier
         if ($this->debugMode) {
             return $email->debug();
         } else {
-            return $email->send();
+            $email->send();
         }
     }
 
@@ -154,7 +156,7 @@ class OrderEmailNotifier
             array('OrderNo' => $this->order->Reference)
         );
 
-        return $this->sendEmail(
+        $this->sendEmail(
             'Order_ReceiptEmail',
             $subject,
             self::config()->bcc_receipt_to_admin
